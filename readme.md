@@ -2,6 +2,8 @@
 
 > Logs your global variables to the console
 
+Useful for finding leaked global variables.
+
 ![screenshot](screenshot.png)
 
 
@@ -13,10 +15,10 @@ Can be used as a bookmarklet or a [DevTools snippet](https://github.com/bgrins/d
 ### Bookmarklet
 
 ```js
-javascript:(function(){function c(a,b){return a.filter(function(a){return-1===b.indexOf(a)})}var b=Object.getOwnPropertyNames(window),d=Object.getOwnPropertyNames(function(){var a=document.createElement("iframe");a.style.display="none";document.body.appendChild(a);var b=a.contentWindow;document.body.removeChild(a);return b}()),b=c(c(b,d),["alert"]);console.log("Globals",b)})()
+javascript:console.log(function(){var a=document.createElement("iframe");a.style.display="none";document.body.appendChild(a);var c=a.contentWindow;document.body.removeChild(a);var a=Object.create(null),b;for(b in window)b in c||(a[b]=window[b]);return a}())
 ```
 
 
 ## License
 
-MIT License • © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)

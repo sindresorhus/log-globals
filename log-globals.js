@@ -1,16 +1,11 @@
 /*
-log-globals
-by Sindre Sorhus
-MIT License
+	log-globals
+	by Sindre Sorhus
+	https://github.com/sindresorhus/log-globals
+	MIT License
 */
 (function () {
 	'use strict';
-
-	function arrayDiff(a, b) {
-		return a.filter(function (el) {
-			return b.indexOf(el) === -1;
-		});
-	}
 
 	function getIframe() {
 		var el = document.createElement('iframe');
@@ -21,12 +16,18 @@ MIT License
 		return win;
 	}
 
-	function getGlobals() {
-		var whitelist = ['alert'];
-		var winProps = Object.getOwnPropertyNames(window);
-		var iframeProps = Object.getOwnPropertyNames(getIframe());
-		return arrayDiff(arrayDiff(winProps, iframeProps), whitelist);
+	function detectGlobals() {
+		var iframe = getIframe();
+		var ret = Object.create(null);
+
+		for (var prop in window) {
+			if (!(prop in iframe)) {
+				ret[prop] = window[prop];
+			}
+		}
+
+		return ret;
 	}
 
-	console.log('Globals', getGlobals());
+	console.log(detectGlobals());
 })();
