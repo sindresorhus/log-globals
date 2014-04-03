@@ -21,4 +21,4 @@ javascript:console.log(function(){var a=document.createElement("iframe");a.style
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
